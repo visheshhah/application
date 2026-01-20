@@ -11,6 +11,8 @@ interface Product{
 
 export default function AddProductForm(){
     const [products, setProducts] = useState<Product[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState("All");
+
 
     const [form, setForm] = useState(
         {
@@ -74,8 +76,20 @@ export default function AddProductForm(){
         setError("");
     }
     
+    const filtered = selectedCategory === "All" ? products : products.filter((p) => p.category === selectedCategory);
+
     return (
         <div>
+            <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+                <option value="All">All</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Home">Home</option>
+            </select>
+
             <form onSubmit={handleSubmit}>
                 <input type="text" name="name" placeholder="Product Name" value={form.name} onChange={handleChange} />
                 <input type="number" name="price" placeholder="Price" value={form.price} onChange={handleChange} />
@@ -87,7 +101,7 @@ export default function AddProductForm(){
 
             <div>
                 <ul>
-                    {products.map(p => 
+                    {filtered.map(p => 
                         <li key={p.id}>
                           <ProductCard id={p.id} name={p.name} stock={p.stock} category={p.category} price={p.price}/>
                         </li>
