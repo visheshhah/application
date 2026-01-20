@@ -9,11 +9,11 @@ interface Product{
 export default function ProductCard({ id, name, quantity, price, category} : Product){
     return(
         <>
-            <div>
-                <p>Name: {name}</p>
-                <p>Price: {price}</p>
-                <p>Category: {category}</p>
-                <p>Quantity: {quantity}</p>
+            <div className="bg-sky-500/100 m-4 p-5 rounded flex flex-col items-start">
+                <p><strong>Name:</strong> {name}</p>
+                <p><strong>Price:</strong> {price}</p>
+                <p><strong>Category:</strong> {category}</p>
+                <p><strong>Quantity:</strong> {quantity}</p>
             </div>
         </>
     )
