@@ -2,34 +2,39 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import ProductCard from './components/ProductCard';
+
+interface Product{
+    id: number;
+    name: string;
+    quantity: number;
+    price: number;
+    category: string;
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  let items = products.map(p => 
+    <li key={p.id}>
+      <ProductCard id={p.id} name={p.name} quantity={p.quantity} category={p.category} price={p.price}/>
+    </li>
+)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <ul>{items}</ul>
     </>
   )
 }
 
+let products: Product[] = [
+  {id: 0, name:"Laptop", price:50000, category:"Electronics", quantity:10},
+  {id: 1, name:"Mobile Phone", price:20000, category:"Electronics", quantity:20},
+];
+
+/* function displayProducts(products: Product[]){
+  products.map((p) => {
+    <ProductCard id={p.id} name={p.name} quantity={p.quantity} category={p.category} price={p.price}/>
+  })
+} */
 export default App
